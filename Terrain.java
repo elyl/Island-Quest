@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.LinkedList;
 
 public class Terrain
@@ -10,7 +9,8 @@ public class Terrain
 
     public Terrain(int nbIsland)
     {
-	this.map = new LinkedList[Terrain.MAP_WIDTH][Terrain.MAP_HEIGHT];
+	Terrain.map = new LinkedList[Terrain.MAP_WIDTH][Terrain.MAP_HEIGHT];
+	init(nbIsland);
     }
 
     public void init(int nbIsland)
@@ -24,10 +24,10 @@ public class Terrain
 		j = 0;
 		while (j < Terrain.MAP_HEIGHT)
 		    {
-			this.map[i][j] = new LinkedList<Entite>();
+			Terrain.map[i][j] = new LinkedList<Entite>();
 			if ((int)Math.random() * 100 > 50 && nbIsland > 0)
 			    {
-				this.map[i][j].add(new Ile(new Position(i, j), null));
+				Terrain.map[i][j].add(new Ile(new Position(i, j), null));
 			    }
 			j++;
 		    }
