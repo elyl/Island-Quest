@@ -1,10 +1,17 @@
 public abstract class Bateau extends Entite
 {
-    protected int	portee;
+    protected static int	c;
+    protected int		portee;
+
+    static
+    {
+	c = 0;
+    }
 
     public Bateau(Position position, Joueur joueur, int type)
     {
 	super(position, joueur, type);
+	this.id = 0;
     }
 
     public boolean move(Position newPos)
