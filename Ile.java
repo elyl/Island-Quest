@@ -1,24 +1,10 @@
-public abstract class Ile extends Entite
+public class Ile extends AbstractIle
 {
-    protected int	income;
+    public static final int DEFAULT_INCOME = 5;
 
-    public Ile(Position position, Joueur joueur, int type)
+    public Ile(Position position, Joueur joueur)
     {
-	super(position, joueur, type);
-    }
-    
-    public boolean canHaveGold()
-    {
-	return (true);
-    }
-    
-    public boolean canMove()
-    {
-	return (false);
-    }
-
-    public void increaseIncome(int bonus)
-    {
-	this.income += bonus;
+	super(position, joueur, Entites.ILE);
+	this.income = Ile.DEFAULT_INCOME;
     }
 }

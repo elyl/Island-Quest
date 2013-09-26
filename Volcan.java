@@ -1,4 +1,4 @@
-public class Volcan extends Ile
+public class Volcan extends AbstractIle
 {
     public static final int DEFAULT_INCOME = 10;
 
