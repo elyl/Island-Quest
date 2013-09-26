@@ -8,4 +8,9 @@ public class Position
 	this.x = x;
 	this.y = y;
     }
+
+    public int distance(Position p)
+    {
+	return ((Math.max(x, p.x) - Math.min(x, p.x)) + (Math.max(y, p.y) - Math.min(y, p.y)));
+    }
 }

@@ -1,37 +1,19 @@
-public abstract class Bateau
+public abstract class Bateau extends Entite
 {
-    protected Position	position;
-    protected int	id;
-    protected int	or;
-    protected boolean	deplacable;
-    protected Joueur	joueur;
-    
-    public Bateau(Position position, int id, Joueur joueur)
+    protected int	portee;
+
+    public Bateau(Position position, Joueur joueur, int type)
     {
-	this.position = position;
-	this.id = id;
-	this.or = 0;
-	this.deplacable = false;
-	this.joueur = joueur;
-    }
-    
-    public boolean canMove()
-    {
-	return (deplacable);
+	super(position, joueur, type);
     }
 
-    public int getId()
+    public boolean move(Position newPos)
     {
-	return (id);
-    }
-
-    public int getOr()
-    {
-	return (or);
-    }
-
-    public void chargerOr(int or)
-    {
-	this.or += or;
+	if (position.distance(newPos) <= portee && deplacable)
+	    {
+		this.deplacable = false;
+		return true;
+	    }
+	return false;
     }
 }
