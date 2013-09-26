@@ -1,5 +1,6 @@
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Collection;
 
 public abstract class Joueur
 {
@@ -22,5 +23,15 @@ public abstract class Joueur
     public void removeBoat(Bateau b)
     {
 	this.bateaux.remove(new Integer(b.getId()));
+    }
+
+    public Collection<Bateau> getBoatList()
+    {
+	return(this.bateaux.values());
+    }
+
+    public Collection<Ile> getIslandList()
+    {
+	return (this.iles.values());
     }
 }
