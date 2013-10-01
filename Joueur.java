@@ -2,7 +2,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collection;
 
-public abstract class Joueur
+public class Joueur
 {
     protected String			nom;
     protected Map<Integer, Bateau>	bateaux;
@@ -33,5 +33,15 @@ public abstract class Joueur
     public Collection<Ile> getIslandList()
     {
 	return (this.iles.values());
+    }
+
+    public void play()
+    {
+	System.out.println("pouet");
+    }
+
+    public String toString()
+    {
+	return (nom);
     }
 }

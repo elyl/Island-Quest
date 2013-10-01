@@ -1,39 +1,64 @@
+import java.util.Iterator;
+import java.util.List;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Terrain
 {
-    public static final int	MAP_WIDTH = 200;
-    public static final int	MAP_HEIGHT = 200;
+    public static final int	MAP_WIDTH =		100;
+    public static final int	MAP_HEIGHT =		20;
+    public static final int	DEFAULT_ISLAND_NUMBER =	10;
 
-    public static LinkedList[][]	map;
+    private List<Bateau>		bateaux;
+    private Map<Position, AbstractIle>	iles;
 
-    public Terrain(int nbIsland)
+    public Terrain()
     {
-	Terrain.map = new LinkedList[Terrain.MAP_WIDTH][Terrain.MAP_HEIGHT];
-	init(nbIsland);
+	this.bateaux = new LinkedList<Bateau>();
+	this.iles = new HashMap<Position, AbstractIle>();
+	init();	
     }
 
-    public void init(int nbIsland)
+    private void init()
     {
-	int	i;
-	int	j;
+	Position	p;
+	int		nb;
 
-	i = 0;
-	while (i < Terrain.MAP_WIDTH)
+	nb = 0;
+	while (nb < Terrain.DEFAULT_ISLAND_NUMBER)
 	    {
-		j = 0;
-		while (j < Terrain.MAP_HEIGHT)
+		p = new Position((int)(Math.random() * Terrain.MAP_WIDTH), (int)(Math.random() * MAP_HEIGHT));
+		if (this.iles.get(p) == null)
 		    {
-			Terrain.map[i][j] = new LinkedList<Entite>();
-			if ((int)Math.random() * 100 > 50 && nbIsland > 0)
-			    {
-				Terrain.map[i][j].add(new Ile(new Position(i, j), null));
-			    }
-			j++;
+			this.iles.put(p, new Ile(p, null));
+			nb++;
 		    }
-		i++;
 	    }
     }
 
+    public String toString()
+    {
+	char	map[][];
+	int	i;
+	int	j;
+	String	str;
+
+	map = new char[Terrain.MAP_HEIGHT][Terrain.MAP_WIDTH + 1];
+	i = 0;
+	while (i < Terrain.MAP_HEIGHT)
+	    {
+		j = 0;
+		while (j < Terrain.MAP_WIDTH)
+		    map[i][j++] = '.';
+		map[i][j] = '\n';
+		i++;
+	    }
 	
+	str = "";
+	i = 0;
+	while (i < Terrain.MAP_HEIGHT)
+	    str += new String(map[i++]);
+	return str;
+    }
 }
