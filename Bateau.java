@@ -1,26 +1,94 @@
-public abstract class Bateau extends Entite
+public class Bateau
 {
-    protected static int	c;
-    protected int		portee;
+    public static final int TYPE_CARAVELLE = 1;
+    public static final int TYPE_GALION = 2;
+    public static final int TYPE_DEFAULT = Bateau.TYPE_CARAVELLE;
 
-    static
+    private static int	nextId = 0;
+
+    private Position	position;
+    private Joueur	joueur;
+    private int		or;
+    private int		id;
+    private int		type;
+    private int		moveDistance;
+    private boolean	canMove;
+
+    public Bateau(Position position, Joueur joueur)
     {
-	c = 0;
+	this(position, joueur, Ile.TYPE_DEFAULT);
     }
 
     public Bateau(Position position, Joueur joueur, int type)
     {
-	super(position, joueur, type);
-	this.id = 0;
+	this.position = position;
+	this.joueur = joueur;
+	this.type = type;
+	this.or = 0;
+	this.id = nextId++;
+	this.canMove = false;
+    }
+    
+    private void init()
+    {
+	switch (type)
+	    {
+	    case Bateau.TYPE_CARAVELLE :
+		moveDistance = 7;
+		break;
+	    case Bateau.TYPE_GALION :
+		moveDistance = 5;
+		break;
+	    }
     }
 
-    public boolean move(Position newPos)
+    public int getOr()
     {
-	if (position.distance(newPos) <= portee && deplacable)
+	return (this.or);
+    }
+
+    public void setOr(int or)
+    {
+	this.or = or;
+    }
+
+    public Position getPosition()
+    {
+	return (this.position);
+    }
+
+    public void setPosition(Position p)
+    {
+	this.position = p;
+    }
+
+    public Joueur getJoueur()
+    {
+	return (this.joueur);
+    }
+
+    public void setJoueur(Joueur j)
+    {
+	this.joueur = j;
+    }
+
+    public boolean canMove()
+    {
+	return (this.canMove);
+    }
+
+    public boolean move(Position p)
+    {
+	if (canMove && position.distance(p) <= moveDistance && !position.equals(p))
 	    {
-		this.deplacable = false;
-		return true;
+		canMove = false;
+		return (true);
 	    }
-	return false;
+	return (false);
+    }
+
+    public boolean equals(Bateau b)
+    {
+	return (b.id == this.id);
     }
 }

@@ -13,4 +13,9 @@ public class Position
     {
 	return ((Math.max(x, p.x) - Math.min(x, p.x)) + (Math.max(y, p.y) - Math.min(y, p.y)));
     }
+
+    public boolean equals(Position p)
+    {
+	return (this.x == p.x && this.y == p.y);
+    }
 }

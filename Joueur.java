@@ -1,38 +1,39 @@
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Collection;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Joueur
 {
-    protected String			nom;
-    protected Map<Integer, Bateau>	bateaux;
-    protected Map<Integer, Ile>		iles;
+    public static final Joueur NULL = null;
+
+    protected String		nom;
+    protected List<Bateau>	bateaux;
+    protected List<Ile>		iles;
     
     public Joueur(String nom)
     {
 	this.nom = nom;
-	this.bateaux = new HashMap<Integer, Bateau>();
-	this.iles = new HashMap<Integer, Ile>();
+	this.bateaux = new ArrayList<Bateau>();
+	this.iles = new ArrayList<Ile>();
     }
 
     public void addBoat(Bateau b)
     {
-	this.bateaux.put(new Integer(b.getId()), b);
+	this.bateaux.add(b);
     }
 
     public void removeBoat(Bateau b)
     {
-	this.bateaux.remove(new Integer(b.getId()));
+	this.bateaux.remove(b);
     }
 
-    public Collection<Bateau> getBoatList()
+    public List<Bateau> getBoatList()
     {
-	return(this.bateaux.values());
+	return(bateaux);
     }
 
-    public Collection<Ile> getIslandList()
+    public List<Ile> getIslandList()
     {
-	return (this.iles.values());
+	return (this.iles);
     }
 
     public void play()
