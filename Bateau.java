@@ -1,25 +1,24 @@
 public class Bateau
 {
-    public static final int TYPE_CARAVELLE = 1;
-    public static final int TYPE_GALION = 2;
-    public static final int TYPE_DEFAULT = Bateau.TYPE_CARAVELLE;
+    public static final BateauType CARAVELLE = new BateauType(5, 3, true, "caravelle");
+    public static final BateauType GALION = new BateauType(7, 1, false, "galion");
+    public static final BateauType DEFAULT = Bateau.CARAVELLE;
 
     private static int	nextId = 0;
 
     private Position	position;
     private Joueur	joueur;
+    private BateauType	type;
     private int		or;
     private int		id;
-    private int		type;
-    private int		moveDistance;
     private boolean	canMove;
 
     public Bateau(Position position, Joueur joueur)
     {
-	this(position, joueur, Ile.TYPE_DEFAULT);
+	this(position, joueur, Bateau.DEFAULT);
     }
 
-    public Bateau(Position position, Joueur joueur, int type)
+    public Bateau(Position position, Joueur joueur, BateauType type)
     {
 	this.position = position;
 	this.joueur = joueur;
@@ -29,19 +28,6 @@ public class Bateau
 	this.canMove = false;
     }
     
-    private void init()
-    {
-	switch (type)
-	    {
-	    case Bateau.TYPE_CARAVELLE :
-		moveDistance = 7;
-		break;
-	    case Bateau.TYPE_GALION :
-		moveDistance = 5;
-		break;
-	    }
-    }
-
     public int getOr()
     {
 	return (this.or);
@@ -50,6 +36,11 @@ public class Bateau
     public void setOr(int or)
     {
 	this.or = or;
+    }
+
+    public int getId()
+    {
+	return (this.id);
     }
 
     public Position getPosition()
@@ -77,10 +68,21 @@ public class Bateau
 	return (this.canMove);
     }
 
+    public void setCanMove(boolean c)
+    {
+	this.canMove = c;
+    }
+
+    public boolean canHaveGold()
+    {
+	return (this.type.canHaveGold());
+    }
+
     public boolean move(Position p)
     {
-	if (canMove && position.distance(p) <= moveDistance && !position.equals(p))
+	if (canMove && position.distance(p) <= type.getMoveDistance() && !position.equals(p))
 	    {
+		position = p;
 		canMove = false;
 		return (true);
 	    }

@@ -50,9 +50,29 @@ public class Terrain
 	return (null);
     }
 
+    public Bateau getBateauById(int id)
+    {
+	Iterator<Bateau>	itr;
+	Bateau			tmp;
+
+	itr = bateaux.iterator();
+	while (itr.hasNext())
+	    {
+		tmp = itr.next();
+		if (tmp.getId() == id)
+		    return (tmp);
+	    }
+	return (null);
+    }
+
     public List<Ile> getIles()
     {
 	return (this.iles);
+    }
+
+    public List<Bateau> getBateaux()
+    {
+	return (this.bateaux);
     }
 
     public void addBateau(Bateau b)
